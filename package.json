@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
-    "liquidjs-lib": "github:altafan/liquidjs-lib#psbt_witness"
+    "liquidjs-lib": "github:altafan/liquidjs-lib#psbt_witness",
+    "node-json-rpc2": "^1.1.0"
   }
 }
