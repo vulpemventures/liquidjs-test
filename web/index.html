@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+  </head>
+  <style>
+    #content {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 0px 50px;
+      width: 480px;
+      padding: 30px;
+      display: none;
+      border: dotted 1pt;
+    }
+    #content h2 {
+      text-align: center;
+    }
+  </style>
+  <body>
+    <div id="mocha"></div>
+    <script src="bundles/fixtures.js"></script>
+    <script src="bundles/liquid.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script>
+      mocha.setup({ ui: 'bdd', timeout: 300000 });
+    </script>
+    <script src="tests/index.js"></script>
+    <script>
+      mocha.run();
+    </script>
+    <div id="content">
+      <h2>Report</h2>
+    </div>
+  </body>
+</html>
