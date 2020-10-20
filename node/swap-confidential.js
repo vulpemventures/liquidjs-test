@@ -48,7 +48,7 @@ async function main() {
 
     // Call the Faucet for alice
     console.log('Requesting Alice funds via faucet...')
-    //await faucet(alice.confidentialAddress);
+    await faucet(alice.confidentialAddress);
     console.log(`Done √ \n`);
 
     console.log(`Fetching Alice utxos...`);
@@ -62,8 +62,8 @@ async function main() {
     const alicePrevOut = liquid.Transaction.fromHex(aliceTxHex).outs[aliceUtxo.vout];
     // Call the mint for Bob
     console.log('Requesting Bob USDT funds via mint...')
-    //const USDT = await mint(bob.confidentialAddress, 1);
-    const USDT = "acdd397b18a5bdb70f25315be03366034701c986c5a2828a6e603d58512b61fb"
+    const USDT = await mint(bob.confidentialAddress, 1);
+    //const USDT = "acdd397b18a5bdb70f25315be03366034701c986c5a2828a6e603d58512b61fb"
     console.log(`Done √ \n`);
 
     console.log(`Fetching USDT utxos of Bob...`);
