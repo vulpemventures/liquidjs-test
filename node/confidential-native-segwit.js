@@ -30,6 +30,7 @@ const keyPair2 = liquid.ECPair.fromWIF(
   'cSv4PQtTpvYKHjfp9qih2RMeieBQAVADqc8JGXPvA7mkJ8yD5QC1',
   network,
 );
+// generate a random blinding keyPair for bob.
 const blindKeyPair2 = liquid.ECPair.fromWIF(
   "cVcDj9Td96x8jcG1eudxKL6hdwziCTgvPhqBoazkDeFGSAR8pCG8",
   network
@@ -42,6 +43,7 @@ async function main() {
 
     const alice = aliceMnemonic.getNextAddress();
     const aliceAddress = alice.confidentialAddress;
+    const aliceChangeAddress = aliceMnemonic.getNextChangeAddress().confidentialAddress;
     const aliceBlindingPrivateKey = alice.blindingPrivateKey;
 
     // this is random address for who is receiving the withdrawal
@@ -91,7 +93,7 @@ async function main() {
       {
         nonce: Buffer.from('00', 'hex'),
         value: liquid.confidential.satoshiToConfidentialValue(49999500),
-        address: aliceAddress,
+        address: aliceChangeAddress,
         asset: LBTC,
       },
       //BOB receiving address
@@ -110,14 +112,20 @@ async function main() {
       },
     ]);
 
-    // NOTICE here we are derving the Alice's blinding PUBLIC key used in the blindOutputs function
-    const aliceBlindingPUBLICKey = liquid.address.fromConfidential(aliceAddress).blindingKey
+    // NOTICE here we are derving the Alice's and Bob's blinding PUBLIC key used in the blindOutputs function
+    const aliceBlindingPublicKeyOfChangeAddress = liquid.address.fromConfidential(aliceChangeAddress).blindingKey;
+    const bobBlindingPublicKeyRetrievedFromAddress = liquid.address.fromConfidential(bobAddress).blindingKey;
 
     // Let's blind all the outputs. The order is important (same of output and some blinding key)
     // The alice linding private key is an hex string, we need to pass to Buffer.
     psbt.blindOutputs(
-      [Buffer.from(aliceBlindingPrivateKey, 'hex')],
-      [aliceBlindingPUBLICKey, blindKeyPair2.publicKey]
+      [
+        Buffer.from(aliceBlindingPrivateKey, 'hex')
+      ],
+      [
+        aliceBlindingPublicKeyOfChangeAddress,
+        bobBlindingPublicKeyRetrievedFromAddress,
+      ]
     );
 
 
