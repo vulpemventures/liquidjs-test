@@ -9,8 +9,12 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
+    "bip174": "github:vulpemventures/bip174",
+    "bip32": "^2.0.6",
+    "bip39": "^3.0.2",
     "liquidjs-lib": "github:vulpemventures/liquidjs-lib",
-    "node-json-rpc2": "^1.1.0"
+    "node-json-rpc2": "^1.1.0",
+    "tdex-sdk": "^1.0.7"
   },
   "devDependencies": {
     "mocha": "^7.1.1"
