@@ -8,7 +8,7 @@
   "author": "tiero",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bip174": "github:vulpemventures/bip174",
     "bip32": "^2.0.6",
     "bip39": "^3.0.2",
