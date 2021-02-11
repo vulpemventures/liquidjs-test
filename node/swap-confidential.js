@@ -143,7 +143,7 @@ async function main() {
       },
     ]);
     // Let's blind all the outputs
-    psbt.blindOutputs(
+    await psbt.blindOutputs(
       [blindKeyPair.privateKey, blindKeyPair2.privateKey],
       [blindKeyPair.publicKey, blindKeyPair.publicKey, blindKeyPair2.publicKey, blindKeyPair2.publicKey]
     );

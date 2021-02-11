@@ -1,8 +1,8 @@
-describe('liquidjs-lib (transaction with psbt)', function() {
+describe('liquidjs-lib (transaction with psbt)', function () {
   const NUM_ITERATIONS = 10;
   const network = liquid.networks.regtest;
 
-  it('Confidential 1-to-1 transaction', function() {
+  it('Confidential 1-to-1 transaction', async function () {
     const alice = liquid.ECPair.fromWIF(
       'cQ7z41awTvKtmiD9p6zkjbgvYbV8g5EDDNcTnKZS9aZ8XdjQiZMU',
       network,
@@ -43,7 +43,7 @@ describe('liquidjs-lib (transaction with psbt)', function() {
       ]);
       const endCraftingTx = performance.now();
       const startBlindingTx = performance.now();
-      psbt.blindOutputs(
+      await psbt.blindOutputs(
         fixtures.confidentialTx.blindingPrivkeys,
         blindingPubkeys,
       );
@@ -70,19 +70,19 @@ describe('liquidjs-lib (transaction with psbt)', function() {
         <h3> 1-to-1 Confidential tx </h3>
         <h4> Iterations: ${NUM_ITERATIONS} </h4>
         Average crafting tx: ${craftingTx.reduce((x, y) => x + y, 0) /
-          craftingTx.length}ms <br />
+      craftingTx.length}ms <br />
         Average blinding tx: ${blindingTx.reduce((x, y) => x + y, 0) /
-          blindingTx.length}ms <br />
+      blindingTx.length}ms <br />
         Average signing tx: ${signingTx.reduce((x, y) => x + y, 0) /
-          signingTx.length}ms <br />
+      signingTx.length}ms <br />
         Average finalizing tx: ${finalizingTx.reduce((x, y) => x + y, 0) /
-          finalizingTx.length}ms <br />
+      finalizingTx.length}ms <br />
         Average total: ${total.reduce((x, y) => x + y, 0) / total.length}ms
       </div>
     `;
   });
 
-  it('Unconfidential swap transaction', function() {
+  it('Unconfidential swap transaction', function () {
     const keyPair = liquid.ECPair.fromWIF(
       'cPNMJD4VyFnQjGbGs3kcydRzAbDCXrLAbvH6wTCqs88qg1SkZT3J',
       network,
@@ -166,17 +166,17 @@ describe('liquidjs-lib (transaction with psbt)', function() {
         <h3> Unconfidential swap </h3>
         <h4> Iterations: ${NUM_ITERATIONS} </h4>
         Average crafting tx: ${craftingTx.reduce((x, y) => x + y, 0) /
-          craftingTx.length}ms <br />
+      craftingTx.length}ms <br />
         Average signing tx: ${signingTx.reduce((x, y) => x + y, 0) /
-          signingTx.length}ms <br />
+      signingTx.length}ms <br />
         Average finalizing tx: ${finalizingTx.reduce((x, y) => x + y, 0) /
-          finalizingTx.length}ms <br />
+      finalizingTx.length}ms <br />
         Average total: ${total.reduce((x, y) => x + y, 0) / total.length}ms
       </div>
     `;
   });
 
-  it('Confidential swap transaction', function() {
+  it('Confidential swap transaction', async function () {
     const keyPair = liquid.ECPair.fromWIF(
       'cPNMJD4VyFnQjGbGs3kcydRzAbDCXrLAbvH6wTCqs88qg1SkZT3J',
       network,
@@ -251,7 +251,7 @@ describe('liquidjs-lib (transaction with psbt)', function() {
         ]);
       const endCraftingTx = performance.now();
       const startBlindingTx = performance.now();
-      psbt.blindOutputs(
+      await psbt.blindOutputs(
         [
           fixtures.confidentialSwap.aliceBlindingPrivkey,
           fixtures.confidentialSwap.bobBlindingPrivkey,
@@ -286,13 +286,13 @@ describe('liquidjs-lib (transaction with psbt)', function() {
         <h3> Confidential swap </h3>
         <h4> Iterations: ${NUM_ITERATIONS} </h4>
         Average crafting tx: ${craftingTx.reduce((x, y) => x + y, 0) /
-          craftingTx.length}ms <br />
+      craftingTx.length}ms <br />
         Average blinding tx: ${blindingTx.reduce((x, y) => x + y, 0) /
-          blindingTx.length}ms <br />
+      blindingTx.length}ms <br />
         Average signing tx: ${signingTx.reduce((x, y) => x + y, 0) /
-          signingTx.length}ms <br />
+      signingTx.length}ms <br />
         Average finalizing tx: ${finalizingTx.reduce((x, y) => x + y, 0) /
-          finalizingTx.length}ms <br />
+      finalizingTx.length}ms <br />
         Average total: ${total.reduce((x, y) => x + y, 0) / total.length}ms
       </div>
     `;

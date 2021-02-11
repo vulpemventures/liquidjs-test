@@ -118,7 +118,7 @@ async function main() {
 
     // Let's blind all the outputs. The order is important (same of output and some blinding key)
     // The alice linding private key is an hex string, we need to pass to Buffer.
-    psbt.blindOutputs(
+    await psbt.blindOutputs(
       [
         Buffer.from(aliceBlindingPrivateKey, 'hex')
       ],
